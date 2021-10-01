@@ -42,7 +42,8 @@ def login_page():
 
 def create_token(username, password):
     validity = datetime.datetime.utcnow() + datetime.timedelta(days=15)
-    token = jwt.encode({'user_id': 123154, 'username': username, 'expiry': str(validity)}, SECRET_KEY, "HS256")
+    print(validity)
+    token = jwt.encode({'user_id': 123154, 'username': username, 'exp': validity}, SECRET_KEY, "HS256")
     return token
 
 @flask_app.route('/authenticate', methods = ['POST'])
@@ -61,4 +62,4 @@ def authenticate_users():
 
 if __name__ == "__main__":
     print("This is a Secure REST API Server")
-    flask_app.run(debug = True, ssl_context=('cert/cert.pem', 'cert/key.pem'))
+    flask_app.run(host="0.0.0.0", debug = True, ssl_context=('cert/cert.pem', 'cert/key.pem'))
