@@ -30,6 +30,14 @@ pipeline {
       }
     }
 
+    stage('Testing the Code'){
+      steps {
+        script {
+          sh "docker run $REGISTRY pytest"
+        }
+      }
+    }
+
     stage('Deploy To Docker Hub') {
       steps {
         script {
