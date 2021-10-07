@@ -20,6 +20,14 @@ pipeline {
         git 'https://github.com/oabuoun/secure_rest_api_server.git'
       }
     }
+
+    stage('Build-Image'){
+      steps {
+        script {
+          DOCKER_IMAGE = docker.build REGISTRY
+        }
+      }
+    }
   }
 
 }
